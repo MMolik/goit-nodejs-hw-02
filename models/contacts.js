@@ -1,19 +1,20 @@
-// const fs = require('fs/promises')
+const fs = require('fs');
+const path = require('path');
 
-const listContacts = async () => {}
+const contactsPath = path.join(__dirname, 'contacts.json');
 
-const getContactById = async (contactId) => {}
-
-const removeContact = async (contactId) => {}
-
-const addContact = async (body) => {}
-
-const updateContact = async (contactId, body) => {}
+function getContacts() {
+  try {
+    const contactsData = fs.readFileSync(contactsPath, 'utf8');
+    const contacts = JSON.parse(contactsData);
+    return contacts;
+  } catch (error) {
+    console.error('Error reading contacts file:', error);
+    return [];
+  }
+}
 
 module.exports = {
-  listContacts,
-  getContactById,
-  removeContact,
-  addContact,
-  updateContact,
-}
+  getContacts,
+  // inne funkcje do manipulacji danymi kontaktowymi, jak dodawanie, usuwanie, aktualizacja, itp.
+};
